@@ -80,16 +80,19 @@ console.log(animals.length);
 var friendsList = [];
 // We chose an array instead of an object because, it will be ONE property 'friends' which contains many values
 function randomFriend(arr){
-     return arr[Math.floor(Math.random() * arr.length)];
+     arr = arr[Math.floor(Math.random() * arr.length)].name;
+     console.log(arr);
+     return arr;
 }
-console.log(randomFriend(animals));
+//console.log(randomFriend(animals));
 
 friendsList.push(
-    randomFriend(animals).name
+    randomFriend(animals)
     );
 console.log(friendsList);
-
-goose['friends'] = randomFriend(animals);
+var gooseFriends = [];
+gooseFriends.push(friendsList[0]);
+goose.friends = gooseFriends;
 console.log(goose);
 /** 
  * Nice work! You're done Part 1. Pat yourself on the back and 
