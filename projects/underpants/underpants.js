@@ -229,7 +229,22 @@ _.reject = function(array, test){
 *   }); -> [[2,4],[1,3,5]]
 }
 */
-
+_.partition = function(array, test){
+    var newArray = [];
+    var truthArray = [];
+    var falseArray = [];
+    _.filter(array,function(value, index, array){
+        if(!(test(value, index, array))){
+            falseArray.push(value);
+        } else if(test(value, index, array)){
+            truthArray.push(value);
+        }
+    }); 
+    newArray.push(truthArray);
+    newArray.push(falseArray);
+    return newArray;
+    
+};
 
 /** _.unique()
 * Arguments:
@@ -241,6 +256,14 @@ _.reject = function(array, test){
 *   _.unique([1,2,2,4,5,6,5,2]) -> [1,2,4,5,6]
 */
 
+_.unique = function(array){
+   var uniqueArr = [];
+   for(var i = 0; i < array.length; i++){
+       if(_.indexOf(array, array[i]) === i){
+           uniqueArr.push(array[i]);
+       }
+   } return uniqueArr;
+};
 
 /** _.map()
 * Arguments:

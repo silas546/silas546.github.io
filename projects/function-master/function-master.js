@@ -84,7 +84,22 @@ for(var i = 0; i < obj.friends.length; i++){
 }
 
 function nonFriends(name, people){
+    var allNonFriends = [];
+    people.forEach(pushNonFriends);
+    return allNonFriends;
+    
 
+    function pushNonFriends(element, index){
+        if(element.name === name) {
+            
+        } else if(!element.friends.some(isFriendCheck)){
+                allNonFriends.push(element.name);
+        }
+    }
+        
+    function isFriendCheck(friend, index){
+    	return name === friend;
+    }
 }
 
 function updateObject(obj, key, value){
@@ -95,13 +110,13 @@ function updateObject(obj, key, value){
 function removeProperties(obj, stringsArr){
     for(var i = 0; i < stringsArr.length; i++){
         if(obj.hasOwnProperty(stringsArr[i])){ // if check actualy not necessarry for this to work
-            delete obj[stringsArr[i]]
+            delete obj[stringsArr[i]];
         }
     }
 }
 
 function dedup(arr){
-    var newArr = []
+    var newArr = [];
     for(var i = 0; i < arr.length; i++){
         if(arr.indexOf(arr[i]) === i){
             newArr.push(arr[i]);
