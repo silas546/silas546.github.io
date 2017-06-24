@@ -281,6 +281,13 @@ _.unique = function(array){
 *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
 */
 
+_.map = function(collection, func){
+    let mapArr = [];
+    _.each(collection, function(value, index, array){
+        mapArr.push(func(value,index,collection));
+    });
+    return mapArr;
+};
 
 /** _.pluck()
 * Arguments:
@@ -292,7 +299,13 @@ _.unique = function(array){
 * Examples:
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
-
+_.pluck = function(array, property){
+let propArr = [];
+_.map(array, function(value, index, collection){
+    propArr.push(collection[index][property]);
+});
+return propArr;
+};
 
 /** _.contains()
 * Arguments:
@@ -308,7 +321,9 @@ _.unique = function(array){
 * Examples:
 *   _.contains([1,"two", 3.14], "two") -> true
 */
-
+_.contains = function(array, value){
+    return _.indexOf(array, value) > -1 ? true : false;
+};
 
 /** _.every()
 * Arguments:
@@ -330,7 +345,20 @@ _.unique = function(array){
 *   _.every([2,4,6], function(e){return e % 2 === 0}) -> true
 *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
 */
-
+_.every = function(collection, func){
+    let result = true;
+    _.each(collection, function(value, index, collection) {
+        if(typeof func != "function"){
+            if (!collection[index]){
+                result = false;
+            }
+        }
+        else if(!func(value, index, collection)){
+           result = false; 
+        }
+    });
+    return result;
+};
 
 /** _.some()
 * Arguments:
@@ -352,7 +380,20 @@ _.unique = function(array){
 *   _.some([1,3,5], function(e){return e % 2 === 0}) -> false
 *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
 */
-
+_.some = function(collection, func){
+    let result = false;
+    _.each(collection, function(value, index, collection) {
+        if(typeof func != "function"){
+            if(collection[index]){
+                result = true;
+            }
+        }
+        else if(func(value, index, collection)){
+           result = true; 
+        }
+    });
+    return result;
+};
 
 /** _.reduce()
 * Arguments:
@@ -373,6 +414,20 @@ _.unique = function(array){
 *   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
 */
 
+_.reduce = function(arr, func, seed){
+    var considerFirst = true;
+    if(arguments.length < 3){
+        seed = arr[0];
+        considerFirst = false;
+    }
+    _.each(arr, function(value, index, arr){
+       if(index > 0 || considerFirst){
+           seed = func(seed, value, index);
+       } 
+    });
+    return seed;
+};
+
 
 /** _.extend()
 * Arguments:
@@ -388,6 +443,18 @@ _.unique = function(array){
 *   _.extend(data, {b:"two"}); -> data now equals {a:"one",b:"two"}
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
+_.extend = function(){
+    let objDest = arguments[0];
+    if(arguments.length < 2){
+        return;
+    }
+        for(var i = 1; i < arguments.length; i++){
+            let objSource = arguments[i];
+            for(var key in arguments[i]){
+                objDest[key] = objSource[key];
+            }
+        } return objDest;
+    };
 
 
 // This is the proper way to end a javascript library
