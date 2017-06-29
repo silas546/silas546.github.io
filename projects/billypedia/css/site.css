@@ -1,5 +1,5 @@
 body {
-    background: rgb(125, 198, 205);
+    background-image: url(https://images3.alphacoders.com/194/194069.jpg);
     color: rgb(45, 45, 45);
     padding: 10px;
     font-family: arial;
@@ -64,7 +64,9 @@ main {
 [class=sidebar] img {
     width: 200px;
 }
-
+[class=sidebar] li {
+    
+}
 [class=content] {
     flex: 1;
     padding: 4px;
@@ -80,4 +82,16 @@ main {
     border: 2px solid;
     border-color: rgba(255, 255, 255, 1);
     cursor: pointer; cursor: hand;
+}
+
+#recordings li {
+    color: rgb(239, 80, 41);
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+#recordings li p {
+    color: black;
+    font-weight: normal;
+    margin: 5px;
 }
